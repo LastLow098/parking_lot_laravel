@@ -17,7 +17,7 @@ class MainController extends Controller {
     }
 
     public function parking() {
-        return view('parking');
+        return view('parking', ['data' => Autos::getParking()]);
     }
 
     public function error() {
@@ -43,10 +43,22 @@ class MainController extends Controller {
         return Clients::getClients();
     }
 
-    public function getAutoParking(Request $request) {
+    public function getAutoNoParkingByClient(Request $request) {
         if (is_numeric($request->get('id'))) {
             return Autos::getNotParking($request->get('id'));
         }
+        return redirect()->route('error');
+    }
+
+    public function getAutoParking() {
+        return Autos::getParking();
+    }
+
+    public function setAutoParking(Request $request) {
+        if (Autos::setAutoParking($request->get('id'))) {
+            return redirect()->route('parking');
+        }
+
         return redirect()->route('error');
     }
 

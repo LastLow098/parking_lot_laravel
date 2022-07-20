@@ -28,5 +28,9 @@ Route::post('/delete/auto', [MainController::class, 'deleteAuto']);
 
 Route::get('/get-clients', [MainController::class, 'getClients']);
 
+Route::get('/get-auto-no-parking', [MainController::class, 'getAutoNoParkingByClient']);
+
 Route::get('/get-auto-parking', [MainController::class, 'getAutoParking']);
+
+Route::post('/set-auto-parking', [MainController::class, 'setAutoParking']);
 

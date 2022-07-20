@@ -14,6 +14,12 @@ class Autos extends Model
             ->get();
     }
 
+    public static function getOneAuto(string $id) {
+        return DB::table('autos')
+            ->where('id', '=', $id)
+            ->get();
+    }
+
     public static function insert(array $array, string $client_id) {
         $array["client_id"] = $client_id;
         return DB::table('autos')
@@ -30,6 +36,20 @@ class Autos extends Model
             ->select()
             ->where('client_id', '=', $id)
             ->where('isParking', '=', '0')
+            ->get();
+    }
+
+    public static function setAutoParking(string $id) {
+        $elem = self::getOneAuto($id)[0];
+        $elem->isParking = !$elem->isParking;
+        return self::edit(array_slice((array) $elem, 1), $elem->id);
+    }
+
+    public static function getParking() {
+        return DB::table('autos')
+            ->join('clients', 'clients.id', '=', 'autos.client_id')
+            ->select(['autos.id as auto_id', 'autos.brand', 'autos.model', 'clients.id as client_id', 'clients.name as client_name'])
+            ->where('autos.isParking', '=', '1')
             ->get();
     }
 

@@ -4,7 +4,10 @@
 
 @section('main_content')
 
-<h2>Стоянка</h2>
+<form action="/" method="GET" class="w-100 d-flex mb-3 mt-3 justify-content-between">
+    <h2>Стоянка</h2>
+    <button type="submit" class="btn btn-primary">Вернутся на главную</button>
+</form>
 
 <div class="mb-3">
     <label for="client" class="form-label">Клиент</label>
@@ -19,7 +22,10 @@
     </select>
 </div>
 
-<button class="btn btn-primary">На стоянке</button>
+<form method="post" action="/set-auto-parking">
+    @csrf
+    <button type="submit" class="btn btn-primary" id="auto-in" name="id">На стоянке</button>
+</form>
 
 
 <div class="table mt-3">
@@ -32,7 +38,18 @@
             </tr>
         </thead>
         <tbody>
-
+            @foreach ($data as $item)
+            <tr>
+                <td>{{$item->client_name}}</td>
+                <td>{{$item->brand}}/{{$item->model}}</td>
+                <td>
+                    <form method="post" action="/set-auto-parking">
+                        @csrf
+                        <button class="btn btn-primary auto-out"type="submit" name="id" value="{{$item->auto_id}}">Уехал</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
