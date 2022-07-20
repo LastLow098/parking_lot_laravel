@@ -6,6 +6,8 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'home'])->name("home");
 
+Route::get('/parking', [MainController::class, 'parking'])->name("parking");
+
 Route::get('/add', [MainController::class, 'edit']);
 
 Route::get('/edit', [MainController::class, 'getByClient'])->name('edit');
@@ -24,5 +26,7 @@ Route::post('/delete/client', [MainController::class, 'deleteClient']);
 
 Route::post('/delete/auto', [MainController::class, 'deleteAuto']);
 
-Route::post('/review/check', [MainController::class, 'review_check']);
+Route::get('/get-clients', [MainController::class, 'getClients']);
+
+Route::get('/get-auto-parking', [MainController::class, 'getAutoParking']);
 

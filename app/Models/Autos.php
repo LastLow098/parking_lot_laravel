@@ -25,6 +25,14 @@ class Autos extends Model
             ->delete($id);
     }
 
+    public static function getNotParking(string $id) {
+        return DB::table('autos')
+            ->select()
+            ->where('client_id', '=', $id)
+            ->where('isParking', '=', '0')
+            ->get();
+    }
+
     public static function edit(array $elem, string $id) {
         return DB::table('autos')
             ->where('id', $id)

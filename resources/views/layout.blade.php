@@ -11,21 +11,16 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    {{-- <header class="p-3 bg-secondary text-white">
+    <header class="p-3 bg-secondary text-white">
         <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="/about" class="nav-link px-2 text-white">About</a></li>
-                <li><a href="/review" class="nav-link px-2 text-white">Review</a></li>
-                </ul>
-
-            <div class="text-end">
-                <button type="button" class="btn btn-warning">Sign-up</button>
-            </div>
+                <li><a href="/" class="nav-link px-2 text-white">Клиенты</a></li>
+                <li><a href="/parking" class="nav-link px-2 text-white">Стоянка</a></li>
+            </ul>
         </div>
         </div>
-    </header> --}}
+    </header>
 
     <div class="container">
         @yield('main_content')
@@ -34,5 +29,6 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type="module" src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
 </body>
 </html>

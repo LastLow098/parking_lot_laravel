@@ -21,22 +21,22 @@
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Имя клиента</label>
-        <input type="text" class="form-control" name="name" id="name" @isset($data) value="{{$data->client->name}}" @endisset>
+        <input type="text" class="form-control" name="name" id="name" @isset($data) value="{{$data->client->name}}" @endisset @if(old('name')) value="{{old('name')}}" @endif>
     </div>
     <div class="mb-3">
         <label for="sex" class="form-label">Пол клиента</label>
         <select multiple name="sex" id="sex" class="form-control">
-            <option value="male" @isset($data) @selected($data->client->sex == "male") @endisset>Мужской</option>
-            <option value="female" @isset($data) @selected($data->client->sex == "female") @endisset>Женский</option>
+            <option value="male" @isset($data) @selected($data->client->sex == "male") @endisset  @if(old('sex')) @selected(old('sex') == "male") @endif>Мужской</option>
+            <option value="female" @isset($data) @selected($data->client->sex == "female") @endisset  @if(old('sex')) @selected(old('sex') == "female") @endif>Женский</option>
         </select>
     </div>
     <div class="mb-3">
         <label for="phone" class="form-label">Телефон клиента</label>
-        <input type="phone" class="form-control" name="phone" id="phone" @isset($data) value="{{$data->client->phone}}" @endisset>
+        <input type="phone" class="form-control" name="phone" id="phone" @isset($data) value="{{$data->client->phone}}" @endisset @if(old('phone')) value="{{old('phone')}}" @endif>
     </div>
     <div class="mb-3">
         <label for="address" class="form-label">Адрес клиента</label>
-        <input type="text" class="form-control" name="address" id="address" @isset($data) value="{{$data->client->address}}" @endisset>
+        <input type="text" class="form-control" name="address" id="address" @isset($data) value="{{$data->client->address}}" @endisset @if(old('address')) value="{{old('address')}}" @endif>
     </div>
 
 @isset($data)
@@ -50,19 +50,19 @@
             @csrf
             <div class="mb-3">
                 <label for="brand" class="form-label">Бренд авто</label>
-                <input type="text" class="form-control" name="brand" id="brand" value="{{$item->brand}}">
+                <input type="text" class="form-control" name="brand" id="brand" value="{{$item->brand}}" @if(old('brand')) value="{{old('brand')}}" @endif>
             </div>
             <div class="mb-3">
                 <label for="model" class="form-label">Модель авто</label>
-                <input type="text" class="form-control" name="model" id="model" value="{{$item->model}}">
+                <input type="text" class="form-control" name="model" id="model" value="{{$item->model}}" @if(old('model')) value="{{old('model')}}" @endif>
             </div>
             <div class="mb-3">
                 <label for="color" class="form-label">Цвет авто</label>
-                <input type="text" class="form-control" name="color" id="color" value="{{$item->color}}">
+                <input type="text" class="form-control" name="color" id="color" value="{{$item->color}}" @if(old('color')) value="{{old('color')}}" @endif>
             </div>
             <div class="mb-3">
                 <label for="gosNumber" class="form-label">Гос номер авто</label>
-                <input type="text" class="form-control" name="gosNumber" id="gosNumber" value="{{$item->gosNumber}}">
+                <input type="text" class="form-control" name="gosNumber" id="gosNumber" value="{{$item->gosNumber}}" @if(old('gosNumber')) value="{{old('gosNumber')}}" @endif>
             </div>
             <input type="text" name="client_id" value="{{$item->client_id}}" hidden>
             <button type="submit" class="btn btn-primary" name="id" value="{{$item->id}}"> Изменить </button>
@@ -81,19 +81,19 @@
 <h5> Добавить авто</h5>
     <div class="mb-3">
         <label for="brand" class="form-label">Бренд авто</label>
-        <input type="text" class="form-control" name="brand" id="brand">
+        <input type="text" class="form-control" name="brand" id="brand" @if(old('brand')) value="{{old('brand')}}" @endif>
     </div>
     <div class="mb-3">
         <label for="model" class="form-label">Модель авто</label>
-        <input type="text" class="form-control" name="model" id="model">
+        <input type="text" class="form-control" name="model" id="model" @if(old('model')) value="{{old('model')}}" @endif>
     </div>
     <div class="mb-3">
         <label for="color" class="form-label">Цвет авто</label>
-        <input type="text" class="form-control" name="color" id="color">
+        <input type="text" class="form-control" name="color" id="color" @if(old('color')) value="{{old('color')}}" @endif>
     </div>
     <div class="mb-3">
         <label for="gosNumber" class="form-label">Гос номер авто</label>
-        <input type="text" class="form-control" name="gosNumber" id="gosNumber">
+        <input type="text" class="form-control" name="gosNumber" id="gosNumber" @if(old('gosNumber')) value="{{old('gosNumber')}}" @endif>
     </div>
     <button type="submit" @isset($data) name="client_id" value="{{$data->client->id}}" @endisset class="btn btn-primary mb-3"> Добавить </button>
 </form>

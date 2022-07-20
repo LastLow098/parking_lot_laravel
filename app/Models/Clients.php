@@ -18,6 +18,10 @@ class Clients extends Model
         return $data;
     }
 
+    public static function getClients() {
+        return DB::table('clients')->select()->get();
+    }
+
     public static function getOne(string $id) {
         return DB::table('clients')
             ->where('id', '=', $id)

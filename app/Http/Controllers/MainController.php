@@ -16,6 +16,10 @@ class MainController extends Controller {
         return view('edit');
     }
 
+    public function parking() {
+        return view('parking');
+    }
+
     public function error() {
         return view('error');
     }
@@ -31,9 +35,19 @@ class MainController extends Controller {
         $id = $request->get('id');
         if (is_numeric($id)) {
             return view('edit', ['data' => $this->getInfoClients($id)]);
-        }else {
-            return 0;
         }
+        return redirect()->route('error');
+    }
+
+    public function getClients(Request $request) {
+        return Clients::getClients();
+    }
+
+    public function getAutoParking(Request $request) {
+        if (is_numeric($request->get('id'))) {
+            return Autos::getNotParking($request->get('id'));
+        }
+        return redirect()->route('error');
     }
 
     public function insertClientWithAuto(Request $request) {
@@ -48,6 +62,7 @@ class MainController extends Controller {
             'color' => 'required|min:3',
             'gosNumber' => 'integer|unique:mysql.autos',
         ]);
+
         $request_arr = $request->all();
         $client_id = Clients::insert(array_slice($request_arr, 1, 4));
         if ($client_id) {
@@ -56,7 +71,7 @@ class MainController extends Controller {
             }
         }
 
-        echo 0;
+        return redirect()->route('error');
     }
 
     public function deleteClient(Request $request) {
