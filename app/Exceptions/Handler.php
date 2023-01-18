@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +48,23 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, $e)
+    {
+        if ($e instanceof QueryException) {
+            return response()->view('error', ['data' => 'Ошибка базы данных']);
+        }
+
+        if ($e instanceof ValidationException) {
+            return parent::render($request, $e);
+        }
+
+        return response()->json(
+            ['message' => $e->getMessage(), 'status' => 'error'],
+            500,
+            ['Content-type' => 'application/json; charset=utf-8', 'Charset' => 'utf-8'],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 }

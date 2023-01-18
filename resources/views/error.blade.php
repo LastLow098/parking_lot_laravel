@@ -3,5 +3,5 @@
 @section('title') Отзывы @endsection
 
 @section('main_content')
-    <h4>Error on Server</h4>
+    <h4> @isset($data) {{$data}} @endisset </h4>
 @endsection

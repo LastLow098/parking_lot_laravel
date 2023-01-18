@@ -1,23 +1,25 @@
 @extends('layout')
 
-@section('title') Главная страница @endsection
+@section('title')
+    Главная страница
+@endsection
 
 @section('main_content')
-
-<div class="container">
-    <form action="/add" method="GET" class="w-100 d-flex mb-3 mt-3 justify-content-between">
-        <h2>Все клиенты</h2>
-        <button type="submit" class="btn btn-primary">Добавить нового клиента</button>
-    </form>
-    <table class="table table-striped" id="mainTable">
-        <thead>
+    
+    <div class="container">
+        <form action="/add" method="GET" class="w-100 d-flex mb-3 mt-3 justify-content-between">
+            <h2>Все клиенты</h2>
+            <button type="submit" class="btn btn-primary">Добавить нового клиента</button>
+        </form>
+        <table class="table table-striped" id="mainTable">
+            <thead>
             <tr>
                 <th>Имя клиента</th>
                 <th>Количество авто</th>
                 <th>Опции</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach ($data as $item)
                 <tr>
                     <td>{{$item->name}}</td>
@@ -37,8 +39,8 @@
                     </td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 
 @endsection
