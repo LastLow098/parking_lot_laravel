@@ -75,7 +75,7 @@ class Clients extends Model
                 ->where('id', $id)
                 ->update($elem);
         } catch (\Exception $exception) {
-            throw new \Exception("Не удалось изменить данные клиента", 0, $exception);
+            throw new \Exception($exception->getMessage(), 0, $exception);
         }
 
     }

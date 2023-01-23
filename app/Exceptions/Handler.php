@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
     public function render($request, $e)
     {
         if ($e instanceof QueryException) {
-            return response()->view('error', ['data' => 'Ошибка базы данных']);
+            return response()->view('error', ['data' => $e]);
         }
 
         if ($e instanceof ValidationException) {

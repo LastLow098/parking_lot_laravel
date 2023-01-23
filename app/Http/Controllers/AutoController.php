@@ -44,7 +44,7 @@ class AutoController extends Controller
             'gosNumber' => 'integer|unique:mysql.autos',
         ]);
 
-        Autos::insert(array_slice($request->all(), 1), $request->get("client_id"));
+        Autos::insert(array_slice($request->all(), 1));
         return redirect()->route('edit', ['id' => $request->get("client_id")]);
     }
 
@@ -61,7 +61,7 @@ class AutoController extends Controller
             'gosNumber' => 'integer|unique:mysql.autos,gosNumber, ' . $request->get('id')
         ]);
 
-        Autos::edit(array_slice($request->all(), 1, 4), $request->get('id'));
+        Autos::edit(array_slice($request->all(), 2, 4), $request->get('id'));
         return redirect()->route('edit', ['id' => $request->get("client_id")]);
     }
 

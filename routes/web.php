@@ -12,15 +12,14 @@ Route::get('/add', [ViewController::class, 'edit']);
 Route::get('/edit', [ClientController::class, 'getByClient'])->name('edit');
 Route::get('/error', [ViewController::class, 'error'])->name('error');
 
-Route::get('/get-clients', [ClientController::class, 'getClients']);
-Route::get('/get-auto-no-parking', [AutoController::class, 'getAutoNoParkingByClient']);
-Route::get('/get-auto-parking', [AutoController::class, 'getAutoParking']);
+Route::get('/clients', [ClientController::class, 'getClients']);
+Route::get('/auto/no-parking', [AutoController::class, 'getAutoNoParkingByClient']);
+Route::get('/auto/parking', [AutoController::class, 'getAutoParking']);
 
-Route::post('/add/client', [ClientController::class, 'insertClientWithAuto']);
-Route::post('/add/auto', [AutoController::class, 'insertAuto']);
-Route::post('/edit/client', [ClientController::class, 'editClient']);
-Route::post('/edit/auto', [AutoController::class, 'editAuto']);
-Route::post('/delete/client', [ClientController::class, 'deleteClient']);
-Route::post('/delete/auto', [AutoController::class, 'deleteAuto']);
-Route::post('/set-auto-parking', [AutoController::class, 'setAutoParking']);
-
+Route::post('/client', [ClientController::class, 'insertClientWithAuto']);
+Route::post('/auto', [AutoController::class, 'insertAuto']);
+Route::put('/client', [ClientController::class, 'editClient']);
+Route::put('/auto', [AutoController::class, 'editAuto']);
+Route::delete('/client', [ClientController::class, 'deleteClient']);
+Route::delete('/auto', [AutoController::class, 'deleteAuto']);
+Route::patch('/auto/set-parking', [AutoController::class, 'setAutoParking']);

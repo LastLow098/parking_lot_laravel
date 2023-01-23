@@ -17,8 +17,9 @@
     <h2>Данные клиента</h2>
     <button type="submit" class="btn btn-primary">Вернутся на главную</button>
 </form>
-<form action=@if(isset($data)) "/edit/client" @else "/add/client" @endif  method="POST">
+<form action="/client" method="POST">
     @csrf
+    @if(isset($data)) <input type="hidden" name="_method" value="put" />@endif
     <div class="mb-3">
         <label for="name" class="form-label">Имя клиента</label>
         <input type="text" class="form-control" name="name" id="name" @isset($data) value="{{$data->client->name}}" @endisset @if(old('name')) value="{{old('name')}}" @endif>
@@ -46,8 +47,9 @@
 <h2>Данные авто клиента</h2>
     @foreach ($data->autos as $key => $item)
         <h5> Авто {{ $key+1 }}</h5>
-        <form action="/edit/auto" method="POST">
+        <form action="/auto" method="POST">
             @csrf
+            <input type="hidden" name="_method" value="put" />
             <div class="mb-3">
                 <label for="brand" class="form-label">Бренд авто</label>
                 <input type="text" class="form-control" name="brand" id="brand" value="{{$item->brand}}" @if(old('brand')) value="{{old('brand')}}" @endif>
@@ -67,14 +69,15 @@
             <input type="text" name="client_id" value="{{$item->client_id}}" hidden>
             <button type="submit" class="btn btn-primary" name="id" value="{{$item->id}}"> Изменить </button>
         </form>
-        <form action="/delete/auto" method="post" style="display: inline-block" class="mt-3">
+        <form action="/auto" method="post" style="display: inline-block" class="mt-3">
             @csrf
+            <input type="hidden" name="_method" value="delete">
             <input type="text" name="client_id" value="{{$item->client_id}}" hidden>
             <button class="btn btn-primary" name="id" value="{{$item->id}}" type="submit">Удалить</button>
         </form>
         <hr>
     @endforeach
-    <form action="/add/auto" method="POST">
+    <form action="/auto" method="POST">
         @csrf
 @endisset
 

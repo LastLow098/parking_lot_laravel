@@ -64,7 +64,7 @@ class ClientController extends Controller
             'address' => 'required|min:15|max:500'
         ]);
 
-        Clients::edit(array_slice($request->all(), 1, 4), $request->get('id'));
+        Clients::edit(array_slice($request->all(), 2, 4), $request->get('id'));
         return redirect()->route('edit', ['id' => $request->get("id")]);
     }
 

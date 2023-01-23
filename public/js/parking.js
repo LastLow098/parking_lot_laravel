@@ -1,6 +1,6 @@
 $(document).ready(function() {
     localStorage.clear()
-    $.get('/get-clients', (data) => {
+    $.get('/clients', (data) => {
         getClients(data)
         getAutos(data[0].id)
         // getParking()
@@ -17,7 +17,7 @@ $('#auto').change(function() {
 })
 
 function getClients(data) {
-    if (data.length != 0) {
+    if (data.length !== 0) {
         $("#client").empty();
         $.each(data, (key, value) => {
             $('#client').append('<option value="' + value.id + '">' + value.name + '</option>');
@@ -31,7 +31,7 @@ async function getAutos(id) {
     if (localStorage.getItem(id)) {
         autos = JSON.parse(localStorage.getItem(id))
     }else {
-        await $.get('/get-auto-no-parking', {'id': id}, (data) => {
+        await $.get('/auto/no-parking', {'id': id}, (data) => {
             localStorage.setItem(id, JSON.stringify(data));
             autos = data
         })

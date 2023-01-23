@@ -5,7 +5,7 @@
 @endsection
 
 @section('main_content')
-    
+
     <div class="container">
         <form action="/add" method="GET" class="w-100 d-flex mb-3 mt-3 justify-content-between">
             <h2>Все клиенты</h2>
@@ -30,8 +30,9 @@
                                 <i class="bi bi-pen"></i>
                             </button>
                         </form>
-                        <form action="/delete/client" method="post" style="display: inline-block">
+                        <form action="/client" method="post" style="display: inline-block">
                             @csrf
+                            <input type="hidden" name="_method" value="delete">
                             <button class="btn btn-primary" name="id" value="{{$item->id}}" type="submit">
                                 <i class="bi bi-x-lg"></i>
                             </button>

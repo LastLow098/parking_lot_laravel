@@ -67,18 +67,17 @@ class Autos extends Model
         try {
             $elem = self::getOneAuto($id);
             $elem->isParking = !$elem->isParking;
-            return self::edit(array_slice((array)$elem, 1), $elem->id);
+            return self::edit(array_slice((array)$elem, 2), $elem->id);
         } catch (\Exception $exception) {
             throw new \Exception("Не удалось изменить статус машины", 0, $exception);
         }
     }
 
 
-    public static function insert(array $array, string $client_id)
+    public static function insert(array $array)
     {
-        $array["client_id"] = $client_id;
         return DB::table('autos')
-            ->insert($array);
+            ->insertGetId($array);
     }
 
 

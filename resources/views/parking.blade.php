@@ -22,8 +22,9 @@
     </select>
 </div>
 
-<form method="post" action="/set-auto-parking">
+<form method="post" action="/auto/set-parking">
     @csrf
+    <input type="hidden" name="_method" value="patch" />
     <button type="submit" class="btn btn-primary" id="auto-in" name="id">На стоянке</button>
 </form>
 
@@ -43,9 +44,10 @@
                 <td>{{$item->client_name}}</td>
                 <td>{{$item->brand}}/{{$item->model}}</td>
                 <td>
-                    <form method="post" action="/set-auto-parking">
+                    <form method="post" action="/auto/set-parking">
                         @csrf
-                        <button class="btn btn-primary auto-out"type="submit" name="id" value="{{$item->auto_id}}">Уехал</button>
+                        <input type="hidden" name="_method" value="patch" />
+                        <button class="btn btn-primary auto-out" type="submit" name="id" value="{{$item->auto_id}}">Уехал</button>
                     </form>
                 </td>
             </tr>

@@ -1,19 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiAutoController;
+use App\Http\Controllers\AutoController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// API for autos
+
+Route::get('/auto/no-parking', [AutoController::class, 'getAutoNoParkingByClient']);
+Route::get('/auto/parking', [AutoController::class, 'getAutoParking']);
+
+Route::post('/auto', [ApiAutoController::class, 'insertAuto']);
+Route::patch('/auto', [ApiAutoController::class, 'editAuto']);
+Route::patch('/auto/set-parking', [ApiAutoController::class, 'setAutoParking']);
+Route::delete('/auto', [ApiAutoController::class, 'deleteAuto']);
+
