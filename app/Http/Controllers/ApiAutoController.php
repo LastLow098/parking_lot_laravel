@@ -14,7 +14,7 @@ class ApiAutoController
             throw new \Exception("Неправельный формат id");
         }
 
-        return Autos::getNotParking($id);
+        return response()->json(Autos::getNotParking($id));
     }
 
     public function setAutoParking($id)
@@ -23,7 +23,7 @@ class ApiAutoController
             throw new \Exception("Неправельный формат id");
         }
 
-        return Autos::setAutoParking($id);
+        return response()->json(Autos::setAutoParking($id));
     }
 
     public function insertAuto(Request $request)
@@ -43,7 +43,7 @@ class ApiAutoController
             throw new \Exception($exception->getMessage(), 0, $exception);
         }
 
-        return self::formatAnswer(['id' => Autos::insert($request->all())]);
+        return response()->json(['id' => Autos::insert($request->all())], 201);
     }
 
     public function editAuto(Request $request, $id)
@@ -56,7 +56,7 @@ class ApiAutoController
             throw new \Exception("Неправельный формат id клиента");
         }
 
-        return Autos::edit($request->all(), $id);
+        return response()->json(Autos::edit($request->all(), $id));
     }
 
     public function deleteAuto($id)
@@ -65,12 +65,6 @@ class ApiAutoController
             throw new \Exception("Неправельный формат id");
         }
 
-        return Autos::remove($id);
-    }
-
-
-    private function formatAnswer($data)
-    {
-        return json_encode(is_array($data) ? ["status" => "success"] + $data : ["data" => $data, "status" => "success"], JSON_UNESCAPED_UNICODE);
+        return response()->json(Autos::remove($id));
     }
 }
