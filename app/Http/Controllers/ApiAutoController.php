@@ -8,13 +8,22 @@ use Nette\Schema\ValidationException;
 
 class ApiAutoController
 {
-    public function setAutoParking(Request $request): int
+    public function getAutoNoParkingByClient($id)
     {
-        if (!is_numeric($request->get('id'))) {
+        if (!is_numeric($id)) {
             throw new \Exception("Неправельный формат id");
         }
 
-        return Autos::setAutoParking($request->get('id'));
+        return Autos::getNotParking($id);
+    }
+
+    public function setAutoParking($id)
+    {
+        if (!is_numeric($id)) {
+            throw new \Exception("Неправельный формат id");
+        }
+
+        return Autos::setAutoParking($id);
     }
 
     public function insertAuto(Request $request)
@@ -37,9 +46,9 @@ class ApiAutoController
         return self::formatAnswer(['id' => Autos::insert($request->all())]);
     }
 
-    public function editAuto(Request $request)
+    public function editAuto(Request $request, $id)
     {
-        if (!is_numeric($request->get('id'))) {
+        if (!is_numeric($id)) {
             throw new \Exception("Неправельный формат id");
         }
 
@@ -47,20 +56,16 @@ class ApiAutoController
             throw new \Exception("Неправельный формат id клиента");
         }
 
-        $id = $request->get('id');
-        $args = $request->all();
-        unset($args['id']);
-
-        return Autos::edit($args, $id);
+        return Autos::edit($request->all(), $id);
     }
 
-    public function deleteAuto(Request $request)
+    public function deleteAuto($id)
     {
-        if (!is_numeric($request->get('id'))) {
+        if (!is_numeric($id)) {
             throw new \Exception("Неправельный формат id");
         }
 
-        return Autos::remove($request->get('id'));
+        return Autos::remove($id);
     }
 
 
