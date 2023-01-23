@@ -17,7 +17,7 @@ class Autos extends Model
                 ->where('client_id', '=', $id)
                 ->get();
         } catch (\Exception $exception) {
-            throw new \Exception("Не удалось получить список машин", 0, $exception);
+            throw new \Exception("Не удалось получить список машин", 404, $exception);
         }
     }
 
@@ -47,7 +47,7 @@ class Autos extends Model
                 ->where('isParking', '=', '0')
                 ->get();
         } catch (\Exception $exception) {
-            throw new \Exception("Не удалось получить список машин вне парковки", 0, $exception);
+            throw new \Exception("Не удалось получить список машин вне парковки; Клиента не существует", 404, $exception);
         }
     }
 
@@ -89,7 +89,7 @@ class Autos extends Model
             return DB::table('autos')
                 ->delete($id);
         }catch (\Exception $exception) {
-            throw new \Exception("Не удалось удалить машину", 0, $exception);
+            throw new \Exception("Не удалось удалить машину", 404, $exception);
         }
     }
 

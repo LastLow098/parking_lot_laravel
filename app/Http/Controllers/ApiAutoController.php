@@ -11,7 +11,7 @@ class ApiAutoController
     public function getAutoNoParkingByClient($id)
     {
         if (!is_numeric($id)) {
-            throw new \Exception("Неправельный формат id");
+            throw new \Exception("Неправельный формат id", 400);
         }
 
         return response()->json(Autos::getNotParking($id));
@@ -20,7 +20,7 @@ class ApiAutoController
     public function setAutoParking($id)
     {
         if (!is_numeric($id)) {
-            throw new \Exception("Неправельный формат id");
+            throw new \Exception("Неправельный формат id", 400);
         }
 
         return response()->json(Autos::setAutoParking($id));
@@ -29,7 +29,7 @@ class ApiAutoController
     public function insertAuto(Request $request)
     {
         if (!is_numeric($request->get("client_id"))) {
-            throw new \Exception("Неправельный формат id клиента");
+            throw new \Exception("Неправельный формат id клиента", 400);
         }
 
         try {
@@ -40,7 +40,7 @@ class ApiAutoController
                 'gosNumber' => 'integer|unique:mysql.autos',
             ]);
         } catch (\Exception $exception) {
-            throw new \Exception($exception->getMessage(), 0, $exception);
+            throw new \Exception($exception->getMessage(), 400, $exception);
         }
 
         return response()->json(['id' => Autos::insert($request->all())], 201);
@@ -49,11 +49,11 @@ class ApiAutoController
     public function editAuto(Request $request, $id)
     {
         if (!is_numeric($id)) {
-            throw new \Exception("Неправельный формат id");
+            throw new \Exception("Неправельный формат id", 400);
         }
 
         if (!is_numeric($request->get('client_id'))) {
-            throw new \Exception("Неправельный формат id клиента");
+            throw new \Exception("Неправельный формат id клиента", 400);
         }
 
         return response()->json(Autos::edit($request->all(), $id));
@@ -62,7 +62,7 @@ class ApiAutoController
     public function deleteAuto($id)
     {
         if (!is_numeric($id)) {
-            throw new \Exception("Неправельный формат id");
+            throw new \Exception("Неправельный формат id", 400);
         }
 
         return response()->json(Autos::remove($id));

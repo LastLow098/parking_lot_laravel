@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler
 
         return response()->json(
             ['message' => $e->getMessage(), 'status' => 'error'],
-            500,
+            $e->getCode() != 0 ? $e->getCode() : 500,
             ['Content-type' => 'application/json; charset=utf-8', 'Charset' => 'utf-8'],
             JSON_UNESCAPED_UNICODE
         );
